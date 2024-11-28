@@ -83,7 +83,7 @@ class ReversiEnv(gymnasium.Env):
 
         # One action for each board position and resign and pass
         self.action_space = spaces.Discrete(self.board_size**2 + 2)
-        observation = self.reset()
+        observation, info = self.reset()
         self.observation_space = spaces.Box(
             np.zeros(observation.shape), np.ones(observation.shape)
         )
@@ -137,6 +137,7 @@ class ReversiEnv(gymnasium.Env):
             self.to_play = ReversiEnv.WHITE
         if seed:
             self.seed(seed)
+        self.state.shape = [1]
         return self.state, {}
 
     def step(self, action):
