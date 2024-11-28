@@ -5,11 +5,11 @@ Game of Reversi
 from io import StringIO
 import sys
 
-import gym
-from gym import spaces
+import gymnasium
+from gymnasium import spaces
 import numpy as np
-from gym import error
-from gym.utils import seeding
+from gymnasium import error
+from gymnasium.utils import seeding
 
 
 def make_random_policy(np_random):
@@ -28,14 +28,14 @@ def make_random_policy(np_random):
     return random_policy
 
 
-class ReversiEnv(gym.Env):
+class ReversiEnv(gymnasium.Env):
     """
     Reversi environment. Play against a fixed opponent.
     """
 
     BLACK = 0
     WHITE = 1
-    metadata = {"render.modes": ["ansi", "human"]}
+    metadata = {"render_modes": ["ansi", "human"]}
 
     def __init__(
         self, player_color, opponent, observation_type, illegal_place_mode, board_size

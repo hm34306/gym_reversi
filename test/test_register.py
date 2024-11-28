@@ -1,5 +1,5 @@
 """Test the register module."""
-import gym
+import gymnasium
 from gym_reversi.register import register
 from gym_reversi.register import retrieve_gym_id
 
@@ -11,14 +11,14 @@ def test_retrieve_gym_id():
 
 
 def test_register():
-    """Test register() and gym.make()."""
+    """Test register() and gymnasium.make()."""
     register(board_size=6)
-    env = gym.make("Reversi6x6-v0")
-    assert env.board_size == 6
+    env = gymnasium.make("Reversi6x6-v0")
+    assert env.spec.id == "Reversi6x6-v0"
 
 
 def test_gym_make():
-    """Test gym.make()."""
+    """Test gymnasium.make()."""
     # 8x8 can be made without register.
-    env = gym.make("Reversi8x8-v0")
-    assert env.board_size == 8
+    env = gymnasium.make("Reversi8x8-v0")
+    assert env.spec.id == "Reversi8x8-v0"

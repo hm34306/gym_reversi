@@ -19,7 +19,7 @@ import gym
 import gym_reversi
 import random
 import numpy as np
-env = gym.make('Reversi8x8-v0')
+env = gymnasium.make('Reversi8x8-v0')
 env.reset()
 for i_episode in range(20):
     observation = env.reset()
