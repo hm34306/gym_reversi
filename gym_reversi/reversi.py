@@ -3,7 +3,9 @@ Game of Reversi
 """
 
 from io import StringIO
+from typing import Any
 import sys
+
 
 import gymnasium
 from gymnasium import spaces
@@ -104,7 +106,7 @@ class ReversiEnv(gymnasium.Env):
 
         return [seed]
 
-    def reset(self):
+    def reset(self, *, seed: int | None = None, options: dict[str, Any] | None = None):
         # init board setting
         self.state = np.zeros((3, self.board_size, self.board_size))
         centerL = int(self.board_size / 2 - 1)
@@ -126,6 +128,8 @@ class ReversiEnv(gymnasium.Env):
             a = self.opponent_policy(self.state)
             ReversiEnv.make_place(self.state, a, ReversiEnv.BLACK)
             self.to_play = ReversiEnv.WHITE
+        if seed:
+            self.seed(seed)
         return self.state
 
     def step(self, action):
