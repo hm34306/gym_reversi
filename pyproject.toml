@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "License :: OSI Approved :: MIT License"
 ]
-dependencies = ["numpy==2.1.1", "gymnasium==1.0.0",]
+dependencies = ["numpy==1.26.4", "gymnasium==1.0.0",]
 
 [project.optional-dependencies]
 dev = ["ruff==0.8.0"]
