@@ -135,9 +135,7 @@ class ReversiEnv(gymnasium.Env):
             a = self.opponent_policy(self.state)
             ReversiEnv.make_place(self.state, a, ReversiEnv.BLACK)
             self.to_play = ReversiEnv.WHITE
-        if seed:
-            self.seed(seed)
-        self.state.shape = [1]
+        self.state.shape = (192,)
         return self.state, {}
 
     def step(self, action):
