@@ -29,6 +29,10 @@ def make_random_policy(np_random):
 
     return random_policy
 
+class DefinedState():
+    def __init__(self, state, shape):
+        self.state = state
+        self.shape = shape
 
 class ReversiEnv(gymnasium.Env):
     """
@@ -93,7 +97,7 @@ class ReversiEnv(gymnasium.Env):
 
         self.seed()
 
-    def get_possible_actions(self, state):
+    def try_get_possible_actions(self, state):
         self.possible_actions = ReversiEnv.get_possible_actions(
             state, self.to_play
         )
@@ -144,8 +148,8 @@ class ReversiEnv(gymnasium.Env):
             a = self.opponent_policy(self.state)
             ReversiEnv.make_place(self.state, a, ReversiEnv.BLACK)
             self.to_play = ReversiEnv.WHITE
-        self.state.shape = (192,)
-        return self.state, {}
+        shape = (2, 8, 8)
+        return DefinedState(self.state, shape), {}
 
     def step(self, action):
         assert self.to_play == self.player_color
@@ -260,8 +264,11 @@ class ReversiEnv(gymnasium.Env):
         opponent_color = 1 - player_color
         for pos_x in range(d):
             for pos_y in range(d):
-                if board[2, pos_x, pos_y] == 0:
+                try:
+                    board[2, pos_x, pos_y] == 0
+                except:
                     continue
+                # print(board[2] ,pos_x, pos_y)
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
                         if dx == 0 and dy == 0:
