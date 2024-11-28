@@ -105,6 +105,13 @@ class ReversiEnv(gymnasium.Env):
             self.opponent_policy = self.opponent
 
         return [seed]
+    
+    def _get_info(self):
+        return {
+            "distance": np.linalg.norm(
+                self._agent_location - self._target_location, ord=1
+            )
+        }
 
     def reset(self, *, seed: int | None = None, options: dict[str, Any] | None = None):
         # init board setting
@@ -130,7 +137,7 @@ class ReversiEnv(gymnasium.Env):
             self.to_play = ReversiEnv.WHITE
         if seed:
             self.seed(seed)
-        return self.state
+        return self.state, {}
 
     def step(self, action):
         assert self.to_play == self.player_color
